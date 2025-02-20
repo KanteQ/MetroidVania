@@ -1,0 +1,68 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Scenes/Hero/Equipment/Bow/Sfx/DrawBow.wav" type="AudioStream" id=1]
+[ext_resource path="res://Scenes/Hero/Equipment/Bow/Sfx/FireBow.wav" type="AudioStream" id=2]
+[ext_resource path="res://Scenes/Hero/Equipment/Bow/Bow.cs" type="Script" id=3]
+[ext_resource path="res://Scenes/Hero/Equipment/Bow/Gfx/HeroHead.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Hero/Equipment/Bow/Gfx/Bow.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 5 )
+region = Rect2( 50, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 5 )
+region = Rect2( 100, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 5 )
+region = Rect2( 150, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 5 )
+region = Rect2( 150, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 5 )
+region = Rect2( 200, 0, 50, 37 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": false,
+"name": "BowAim",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": false,
+"name": "BowFire",
+"speed": 20.0
+} ]
+
+[node name="Bow" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="HeroHead" type="Sprite" parent="."]
+position = Vector2( -2, 0 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, -3 )
+
+[node name="BowAnimations" type="AnimatedSprite" parent="."]
+position = Vector2( -5, 3 )
+frames = SubResource( 7 )
+animation = "BowFire"
+frame = 4
+playing = true
+offset = Vector2( 5, -3 )
+
+[node name="ArrowSpawnPosition" type="Position2D" parent="BowAnimations"]
+
+[node name="DrawBowSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+
+[node name="FireBowSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )

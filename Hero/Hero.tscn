@@ -1,0 +1,733 @@
+[gd_scene load_steps=121 format=2]
+
+[ext_resource path="res://Scenes/Hero/Gfx/adventurer-v1.5-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Hero/Scripts/HeroStateMachine.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/Hero/Equipment/Glider/Glider.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Hero/Gfx/AdventurerRopeTraversal.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Shared/Hitbox/Hitbox.cs" type="Script" id=5]
+[ext_resource path="res://Scenes/Hero/Sfx/FootStep2.wav" type="AudioStream" id=6]
+[ext_resource path="res://Scenes/Hero/Sfx/TakingDamage.wav" type="AudioStream" id=7]
+[ext_resource path="res://Scenes/Hero/Sfx/JumpLand.wav" type="AudioStream" id=8]
+[ext_resource path="res://Scenes/Hero/Sfx/FootStep1.wav" type="AudioStream" id=9]
+[ext_resource path="res://Scenes/Hero/Sfx/GrabLedge.wav" type="AudioStream" id=10]
+[ext_resource path="res://Scenes/Hero/Sfx/JumpLiftOff.wav" type="AudioStream" id=11]
+[ext_resource path="res://Scenes/Hero/Sfx/RopeTraverse.wav" type="AudioStream" id=12]
+[ext_resource path="res://Scenes/Hero/Sfx/Slide.wav" type="AudioStream" id=13]
+[ext_resource path="res://Scenes/Hero/Sfx/FootStep3.wav" type="AudioStream" id=14]
+[ext_resource path="res://Scenes/Hero/Sfx/ClimbLedge.wav" type="AudioStream" id=15]
+[ext_resource path="res://Scenes/Hero/Sfx/SwordSwing.wav" type="AudioStream" id=16]
+[ext_resource path="res://Scenes/Hero/Gfx/adventurer_bow_aim.png" type="Texture" id=17]
+[ext_resource path="res://Scenes/Hero/Gfx/adventurer_bow_new.png" type="Texture" id=18]
+[ext_resource path="res://Scenes/Hero/Equipment/Bow/Bow.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/Shaders/WhiteHitEffect.gdshader" type="Shader" id=20]
+[ext_resource path="res://Scenes/Shared/Hurtbox/Hurtbox.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Hero/Gfx/adventurer_die.png" type="Texture" id=22]
+[ext_resource path="res://Scenes/Hero/Sfx/BodyGroundImpact.wav" type="AudioStream" id=23]
+[ext_resource path="res://Scenes/Hero/Gfx/adventurer_die_crouch.png" type="Texture" id=24]
+[ext_resource path="res://Scenes/Hero/Sfx/HeroDie.wav" type="AudioStream" id=25]
+
+[sub_resource type="RectangleShape2D" id=29]
+extents = Vector2( 2.5, 2.5 )
+
+[sub_resource type="RectangleShape2D" id=50]
+extents = Vector2( 7.25, 13.25 )
+
+[sub_resource type="RectangleShape2D" id=30]
+extents = Vector2( 10.75, 6.25 )
+
+[sub_resource type="ShaderMaterial" id=82]
+resource_local_to_scene = true
+shader = ExtResource( 20 )
+shader_param/active = false
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 1 )
+region = Rect2( 250, 222, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 1 )
+region = Rect2( 300, 222, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 259, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 1 )
+region = Rect2( 50, 259, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 1 )
+region = Rect2( 100, 259, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 1 )
+region = Rect2( 150, 259, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 1 )
+region = Rect2( 250, 481, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 1 )
+region = Rect2( 300, 481, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 518, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 1 )
+region = Rect2( 50, 518, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = ExtResource( 18 )
+region = Rect2( 0, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=75]
+atlas = ExtResource( 18 )
+region = Rect2( 50, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=76]
+atlas = ExtResource( 18 )
+region = Rect2( 100, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=77]
+atlas = ExtResource( 18 )
+region = Rect2( 150, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=78]
+atlas = ExtResource( 18 )
+region = Rect2( 0, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 17 )
+region = Rect2( 50, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=72]
+atlas = ExtResource( 17 )
+region = Rect2( 100, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=73]
+atlas = ExtResource( 17 )
+region = Rect2( 150, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=83]
+atlas = ExtResource( 1 )
+region = Rect2( 200, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 1 )
+region = Rect2( 250, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 1 )
+region = Rect2( 300, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = ExtResource( 22 )
+region = Rect2( 0, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=87]
+atlas = ExtResource( 22 )
+region = Rect2( 50, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 22 )
+region = Rect2( 100, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = ExtResource( 22 )
+region = Rect2( 150, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 22 )
+region = Rect2( 200, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=91]
+atlas = ExtResource( 22 )
+region = Rect2( 250, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=92]
+atlas = ExtResource( 22 )
+region = Rect2( 300, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=93]
+atlas = ExtResource( 24 )
+region = Rect2( 0, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=94]
+atlas = ExtResource( 24 )
+region = Rect2( 50, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=95]
+atlas = ExtResource( 24 )
+region = Rect2( 100, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=96]
+atlas = ExtResource( 24 )
+region = Rect2( 150, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=97]
+atlas = ExtResource( 24 )
+region = Rect2( 200, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=98]
+atlas = ExtResource( 24 )
+region = Rect2( 250, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=99]
+atlas = ExtResource( 24 )
+region = Rect2( 300, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 50, 111, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 100, 111, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 50, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 100, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 150, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 74, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 50, 74, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 100, 74, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 1 )
+region = Rect2( 150, 74, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 1 )
+region = Rect2( 200, 74, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 1 )
+region = Rect2( 250, 74, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 1 )
+region = Rect2( 300, 74, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 111, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 1 )
+region = Rect2( 250, 148, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 1 )
+region = Rect2( 300, 148, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 185, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 1 )
+region = Rect2( 50, 185, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 1 )
+region = Rect2( 100, 185, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 1 )
+region = Rect2( 50, 148, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 1 )
+region = Rect2( 100, 148, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 1 )
+region = Rect2( 150, 148, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 1 )
+region = Rect2( 200, 148, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 4 )
+region = Rect2( 50, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 4 )
+region = Rect2( 100, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 4 )
+region = Rect2( 150, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 4 )
+region = Rect2( 200, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 4 )
+region = Rect2( 50, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 4 )
+region = Rect2( 100, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 4 )
+region = Rect2( 150, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 4 )
+region = Rect2( 200, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 4 )
+region = Rect2( 250, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 50, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 100, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 150, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 200, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 250, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 300, 37, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 150, 111, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 200, 111, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 1 )
+region = Rect2( 250, 111, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 300, 111, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 148, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 1 )
+region = Rect2( 200, 0, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=79]
+atlas = ExtResource( 1 )
+region = Rect2( 100, 444, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=80]
+atlas = ExtResource( 1 )
+region = Rect2( 150, 444, 50, 37 )
+
+[sub_resource type="AtlasTexture" id=81]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 50, 37 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ) ],
+"loop": false,
+"name": "HeroAttack",
+"speed": 25.0
+}, {
+"frames": [ SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ) ],
+"loop": false,
+"name": "HeroAttackInAir",
+"speed": 25.0
+}, {
+"frames": [ SubResource( 64 ) ],
+"loop": true,
+"name": "HeroBowAim",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ) ],
+"loop": true,
+"name": "HeroBowDraw",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ) ],
+"loop": false,
+"name": "HeroBowFire",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 83 ), SubResource( 84 ), SubResource( 85 ) ],
+"loop": true,
+"name": "HeroCrouchTakeDamage",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 86 ), SubResource( 87 ), SubResource( 88 ), SubResource( 89 ), SubResource( 90 ), SubResource( 91 ), SubResource( 92 ) ],
+"loop": false,
+"name": "HeroDeath",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 93 ), SubResource( 94 ), SubResource( 95 ), SubResource( 96 ), SubResource( 97 ), SubResource( 98 ), SubResource( 99 ) ],
+"loop": false,
+"name": "HeroDeathCrouching",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "HeroFall",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "HeroIdle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": false,
+"name": "HeroInitJump",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "HeroJump",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
+"loop": false,
+"name": "HeroLedgeClimb",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
+"loop": true,
+"name": "HeroLedgeGrab",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ) ],
+"loop": true,
+"name": "HeroRopeClimbUp",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ) ],
+"loop": true,
+"name": "HeroRopeTraverse",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "HeroRun",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
+"loop": true,
+"name": "HeroSlide",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": false,
+"name": "HeroSlideStandUp",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 79 ), SubResource( 80 ), SubResource( 81 ) ],
+"loop": true,
+"name": "HeroTakeDamage",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=51]
+
+[sub_resource type="CircleShape2D" id=52]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CapsuleShape2D" id=100]
+height = 9.0
+
+[node name="Hero" type="KinematicBody2D"]
+scale = Vector2( 2, 2 )
+z_index = 1
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 2 )
+
+[node name="CollisionShapeHead" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -4.5 )
+shape = SubResource( 29 )
+
+[node name="CollisionShapeBody" type="CollisionShape2D" parent="."]
+position = Vector2( 0.25, 3.75 )
+shape = SubResource( 50 )
+
+[node name="CollisionShapeSlide" type="CollisionShape2D" parent="."]
+position = Vector2( 3, 11 )
+shape = SubResource( 30 )
+disabled = true
+
+[node name="HeroAnimations" type="AnimatedSprite" parent="."]
+material = SubResource( 82 )
+frames = SubResource( 6 )
+animation = "HeroIdle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 2560
+limit_bottom = 720
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="SlideTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+
+[node name="SlideStandUpTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+
+[node name="LedgeFallTimer" type="Timer" parent="Timers"]
+wait_time = 0.4
+
+[node name="LedgeClimbTimer" type="Timer" parent="Timers"]
+wait_time = 0.9
+
+[node name="AttackTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+
+[node name="CoyoteTimeTimer" type="Timer" parent="Timers"]
+wait_time = 0.15
+one_shot = true
+
+[node name="PassThroughPlatformTimer" type="Timer" parent="Timers"]
+
+[node name="TakingDamageTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="RayCasts" type="Node2D" parent="."]
+
+[node name="LedgeGrabRayCastTileAbove" type="RayCast2D" parent="RayCasts"]
+position = Vector2( 0, -15 )
+enabled = true
+cast_to = Vector2( 19, 0 )
+
+[node name="LedgeGrabRayTileHead" type="RayCast2D" parent="RayCasts"]
+position = Vector2( 0, -11 )
+enabled = true
+cast_to = Vector2( 12, 0 )
+
+[node name="LeftWallRayCast" type="RayCast2D" parent="RayCasts"]
+position = Vector2( -9, 10 )
+enabled = true
+cast_to = Vector2( -8, 0 )
+
+[node name="RightWallRayCast" type="RayCast2D" parent="RayCasts"]
+position = Vector2( 9, 10 )
+enabled = true
+cast_to = Vector2( 8, 0 )
+
+[node name="JumpBufferRayCast" type="RayCast2D" parent="RayCasts"]
+position = Vector2( 0, 18 )
+enabled = true
+cast_to = Vector2( 0, 15 )
+
+[node name="CornerCorrLeftRayCast" type="RayCast2D" parent="RayCasts"]
+position = Vector2( -7, -10 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 15 )
+
+[node name="CornerCorrMiddleRayCast" type="RayCast2D" parent="RayCasts"]
+position = Vector2( 0, -10 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 15 )
+
+[node name="CornerCorrRightRayCast" type="RayCast2D" parent="RayCasts"]
+position = Vector2( 7.5, -10 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 15 )
+
+[node name="Equipment" type="Node2D" parent="."]
+
+[node name="Glider" parent="Equipment" instance=ExtResource( 3 )]
+
+[node name="Bow" parent="Equipment" instance=ExtResource( 19 )]
+visible = false
+
+[node name="Area2Ds" type="Node2D" parent="."]
+
+[node name="Area2DGrabRopeRight" type="Area2D" parent="Area2Ds"]
+position = Vector2( 20, -18 )
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/Area2DGrabRopeRight"]
+position = Vector2( -3, 0 )
+scale = Vector2( 1, 0.5 )
+shape = SubResource( 51 )
+
+[node name="Area2DGrabRopeLeft" type="Area2D" parent="Area2Ds"]
+position = Vector2( -20, -18 )
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/Area2DGrabRopeLeft"]
+position = Vector2( 3, 0 )
+scale = Vector2( 1, 0.5 )
+shape = SubResource( 52 )
+
+[node name="Area2DSwordHitbox" type="Area2D" parent="Area2Ds"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource( 5 )
+ResetTime = 0.3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/Area2DSwordHitbox"]
+scale = Vector2( 1.2, 1.5 )
+shape = SubResource( 1 )
+
+[node name="Hurtbox" parent="Area2Ds" instance=ExtResource( 21 )]
+IgnoredObjects = PoolStringArray( "Arrow" )
+
+[node name="HeroPickupArea" type="Area2D" parent="Area2Ds"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/HeroPickupArea"]
+position = Vector2( 0, 3.5 )
+shape = SubResource( 100 )
+
+[node name="ParticleEffects" type="Node2D" parent="."]
+
+[node name="DustParticlesPosition" type="Position2D" parent="ParticleEffects"]
+position = Vector2( 0, 11.5 )
+
+[node name="DustLandingParticlesPosition" type="Position2D" parent="ParticleEffects"]
+position = Vector2( 0, 17.5 )
+
+[node name="SoundEffects" type="Node2D" parent="."]
+
+[node name="ClimbLedgeSfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 15 )
+volume_db = -12.0
+bus = "SoundEffects"
+
+[node name="FootStep1Sfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 9 )
+volume_db = -22.0
+bus = "SoundEffects"
+
+[node name="FootStep2Sfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 6 )
+volume_db = -22.0
+bus = "SoundEffects"
+
+[node name="FootStep3Sfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 14 )
+volume_db = -22.0
+bus = "SoundEffects"
+
+[node name="GrabLedgeSfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 10 )
+volume_db = -10.0
+bus = "SoundEffects"
+
+[node name="TakingDamageSfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 7 )
+pitch_scale = 1.3
+bus = "SoundEffects"
+
+[node name="JumpLandSfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 8 )
+volume_db = -22.0
+bus = "SoundEffects"
+
+[node name="JumpLiftOffSfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 11 )
+volume_db = -16.0
+bus = "SoundEffects"
+
+[node name="RopeTraverseSfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 12 )
+volume_db = -30.0
+pitch_scale = 1.6
+bus = "SoundEffects"
+
+[node name="SlideSfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 13 )
+volume_db = -6.0
+bus = "SoundEffects"
+
+[node name="SwordSwingSfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 16 )
+bus = "SoundEffects"
+
+[node name="DieSfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 25 )
+bus = "SoundEffects"
+
+[node name="GroundImpactSfx" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource( 23 )
+bus = "SoundEffects"
+
+[connection signal="animation_finished" from="HeroAnimations" to="." method="HeroAnimationDone"]
