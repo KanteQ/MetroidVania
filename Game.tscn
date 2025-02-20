@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/Hero/Hero.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/World/Areas/Caves/AreaCaves.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Backgrounds/Cave/background2.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Backgrounds/Cave/background1.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Backgrounds/Cave/background4a.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Backgrounds/Cave/background3.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/World/World.cs" type="Script" id=8]
+[ext_resource path="res://Scenes/Minimap/Minimap.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/GUI/GUI.tscn" type="PackedScene" id=10]
+
+[node name="Game" type="Node2D"]
+
+[node name="World" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="AreaCaves" parent="World" instance=ExtResource( 2 )]
+
+[node name="Hero" parent="World" instance=ExtResource( 1 )]
+position = Vector2( -773, 593 )
+
+[node name="Minimap" parent="World" instance=ExtResource( 9 )]
+offset = Vector2( 1107, 0 )
+transform = Transform2D( 1, 0, 0, 1, 1107, 0 )
+
+[node name="GUI" parent="World" instance=ExtResource( 10 )]
+
+[node name="CaveBackground" type="Node2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CaveBackground"]
+scroll_limit_end = Vector2( 0, 720 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CaveBackground/ParallaxBackground"]
+motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 1280, 0 )
+
+[node name="Sprite" type="Sprite" parent="CaveBackground/ParallaxBackground/ParallaxLayer"]
+position = Vector2( 640, 360 )
+scale = Vector2( 1.33333, 1.5 )
+texture = ExtResource( 4 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="CaveBackground/ParallaxBackground"]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 1280, 0 )
+
+[node name="Sprite" type="Sprite" parent="CaveBackground/ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 640, 360 )
+scale = Vector2( 1.33333, 1.5 )
+texture = ExtResource( 3 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="CaveBackground/ParallaxBackground"]
+motion_scale = Vector2( 0.6, 1 )
+motion_mirroring = Vector2( 1280, 0 )
+
+[node name="Sprite" type="Sprite" parent="CaveBackground/ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 640, 360 )
+scale = Vector2( 1.33333, 1.5 )
+texture = ExtResource( 6 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="CaveBackground/ParallaxBackground"]
+motion_scale = Vector2( 0.8, 1 )
+motion_mirroring = Vector2( 1280, 0 )
+
+[node name="Sprite" type="Sprite" parent="CaveBackground/ParallaxBackground/ParallaxLayer4"]
+position = Vector2( 640, 360 )
+scale = Vector2( 1.33333, 1.5 )
+texture = ExtResource( 5 )
+
+[node name="ScanRoomAreaSize" type="ColorRect" parent="."]
+margin_left = -64000.0
+margin_top = -36000.0
+margin_right = 64000.0
+margin_bottom = 36000.0
+color = Color( 1, 1, 1, 0.196078 )

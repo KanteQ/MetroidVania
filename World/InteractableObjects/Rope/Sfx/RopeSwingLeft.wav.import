@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/RopeSwingLeft.wav-30735e810ebd6c4b6047483cd5c1c16a.sample"
+
+[deps]
+
+source_file="res://Scenes/World/InteractableObjects/Rope/Sfx/RopeSwingLeft.wav"
+dest_files=[ "res://.import/RopeSwingLeft.wav-30735e810ebd6c4b6047483cd5c1c16a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
