@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/GUITheme/MetroidVaniaTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/SettingsMenu/KeyboardInputKey/KeyboardInputKey.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/SettingsMenu/XboxInputGfx/XboxInputGfx.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Fonts/league-gothic.regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scenes/Shared/MappedInput/MappedInput.cs" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[node name="MappedInput" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = -1158.0
+margin_bottom = -630.0
+rect_min_size = Vector2( 72, 40 )
+theme = ExtResource( 1 )
+script = ExtResource( 5 )
+ActionName = "Jump"
+HidePanel = true
+Text = "Text Above Button"
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 72.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 72, 40 )
+
+[node name="KeyboardInputKey" parent="." instance=ExtResource( 2 )]
+position = Vector2( 36, 20 )
+
+[node name="XBoxInputGfx" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 36, 20 )
+
+[node name="TextLabel" type="Label" parent="."]
+margin_left = -15.0
+margin_top = -19.0
+margin_right = 88.0
+margin_bottom = 6.0
+rect_min_size = Vector2( 100, 25 )
+custom_fonts/font = SubResource( 1 )
+align = 1
+valign = 1

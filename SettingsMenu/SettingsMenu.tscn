@@ -1,0 +1,831 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Assets/GUITheme/MetroidVaniaTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/SettingsMenu/KeyboardInputKey/KeyboardInputKey.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/SettingsMenu/MappedAction/MappedAction.cs" type="Script" id=3]
+[ext_resource path="res://Scenes/SettingsMenu/XboxInputGfx/XboxInputGfx.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/SettingsMenu/VolumeBar/VolumeBar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Sfx/MenuTestSound.wav" type="AudioStream" id=6]
+[ext_resource path="res://Scenes/SettingsMenu/Scripts/AudioTab.cs" type="Script" id=7]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Sfx/RotateMenu.wav" type="AudioStream" id=8]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Sfx/MenuSelect.wav" type="AudioStream" id=9]
+[ext_resource path="res://Scenes/SettingsMenu/Scripts/SettingsTabContainer.cs" type="Script" id=10]
+[ext_resource path="res://Scenes/SettingsMenu/Scripts/VideoTab.cs" type="Script" id=11]
+[ext_resource path="res://Scenes/SettingsMenu/Scripts/ControlsTab.cs" type="Script" id=12]
+[ext_resource path="res://Scenes/SettingsMenu/SettingsMenu.cs" type="Script" id=13]
+
+[node name="SettingsMenu" type="CanvasLayer"]
+pause_mode = 2
+layer = 2
+visible = false
+script = ExtResource( 13 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+margin_left = 434.0
+margin_top = 100.0
+margin_right = 834.0
+margin_bottom = 620.0
+
+[node name="TabContainer" type="TabContainer" parent="Control/MarginContainer"]
+margin_right = 400.0
+margin_bottom = 520.0
+tab_align = 0
+script = ExtResource( 10 )
+
+[node name="MenuMoveSfx" type="AudioStreamPlayer" parent="Control/MarginContainer/TabContainer"]
+stream = ExtResource( 8 )
+bus = "SoundEffects"
+
+[node name="MenuSelectSfx" type="AudioStreamPlayer" parent="Control/MarginContainer/TabContainer"]
+stream = ExtResource( 9 )
+bus = "SoundEffects"
+
+[node name="MenuSoundLevelSfx" type="AudioStreamPlayer" parent="Control/MarginContainer/TabContainer"]
+stream = ExtResource( 6 )
+bus = "SoundEffects"
+
+[node name="Controls" type="Tabs" parent="Control/MarginContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 41.0
+margin_right = -5.0
+margin_bottom = -9.0
+script = ExtResource( 12 )
+
+[node name="Panel" type="Panel" parent="Control/MarginContainer/TabContainer/Controls"]
+margin_left = 28.0
+margin_top = 10.0
+margin_right = 366.0
+margin_bottom = 460.0
+
+[node name="ToAudioButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel"]
+margin_left = 13.0
+margin_top = 393.0
+margin_right = 93.0
+margin_bottom = 433.0
+focus_neighbour_top = NodePath("../ScrollContainer/VBoxContainer/ActionPauseGame/GridContainer/KeyboardActionButton")
+focus_neighbour_bottom = NodePath(".")
+text = "Audio"
+
+[node name="ToVideoButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel"]
+margin_left = 130.0
+margin_top = 393.0
+margin_right = 210.0
+margin_bottom = 433.0
+focus_neighbour_left = NodePath("../ToAudioButton")
+focus_neighbour_top = NodePath("../ScrollContainer/VBoxContainer/ActionPauseGame/GridContainer/KeyboardActionButton")
+focus_neighbour_bottom = NodePath(".")
+text = "Video"
+
+[node name="CloseButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel"]
+margin_left = 245.0
+margin_top = 393.0
+margin_right = 325.0
+margin_bottom = 433.0
+focus_neighbour_left = NodePath("../ToVideoButton")
+focus_neighbour_top = NodePath("../ScrollContainer/VBoxContainer/ActionPauseGame/GridContainer/GamepadActionButton")
+focus_neighbour_bottom = NodePath(".")
+text = "Close"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel"]
+margin_left = 20.0
+margin_top = 2.0
+margin_right = 328.0
+margin_bottom = 27.0
+
+[node name="ActionLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/HBoxContainer"]
+margin_right = 110.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 110, 0 )
+text = "Action"
+
+[node name="KeyboardLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/HBoxContainer"]
+margin_left = 114.0
+margin_right = 246.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 132, 0 )
+text = "Keyboard"
+align = 1
+
+[node name="GamepadLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/HBoxContainer"]
+margin_left = 250.0
+margin_right = 299.0
+margin_bottom = 25.0
+text = "Gamepad"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer/TabContainer/Controls/Panel"]
+modulate = Color( 0.835294, 0.568627, 0.12549, 1 )
+margin_left = 10.0
+margin_top = 26.0
+margin_right = 328.0
+margin_bottom = 4.0
+
+[node name="HSeparator2" type="HSeparator" parent="Control/MarginContainer/TabContainer/Controls/Panel"]
+modulate = Color( 0.835294, 0.568627, 0.12549, 1 )
+margin_left = 10.0
+margin_top = 384.0
+margin_right = 328.0
+margin_bottom = 4.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel"]
+margin_left = 10.0
+margin_top = 31.0
+margin_right = 330.0
+margin_bottom = 381.0
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer"]
+margin_right = 20.0
+margin_bottom = 236.0
+
+[node name="ActionUp" type="PanelContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer"]
+margin_right = 315.0
+margin_bottom = 51.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+ActionName = "Up"
+
+[node name="RestoreFocusTimer" type="Timer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp"]
+one_shot = true
+
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 305.0
+margin_bottom = 41.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="ActionNameLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp/GridContainer"]
+margin_top = 3.0
+margin_right = 105.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 105, 0 )
+focus_mode = 2
+text = "ActionNameLabel"
+
+[node name="KeyboardActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp/GridContainer"]
+margin_left = 145.0
+margin_right = 215.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 70, 0 )
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+
+[node name="KeyboardInputKey" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp/GridContainer/KeyboardActionButton" instance=ExtResource( 2 )]
+position = Vector2( 35, 15 )
+
+[node name="GamepadActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp/GridContainer"]
+margin_left = 255.0
+margin_right = 295.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="XBoxInputGfx" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp/GridContainer/GamepadActionButton" instance=ExtResource( 4 )]
+position = Vector2( 20, 15 )
+
+[node name="ActionDown" type="PanelContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 55.0
+margin_right = 315.0
+margin_bottom = 106.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+ActionName = "Down"
+
+[node name="RestoreFocusTimer" type="Timer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown"]
+one_shot = true
+
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 305.0
+margin_bottom = 41.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="ActionNameLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown/GridContainer"]
+margin_top = 3.0
+margin_right = 105.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 105, 0 )
+focus_mode = 2
+text = "ActionNameLabel"
+
+[node name="KeyboardActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown/GridContainer"]
+margin_left = 145.0
+margin_right = 215.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 70, 0 )
+focus_neighbour_left = NodePath(".")
+
+[node name="KeyboardInputKey" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown/GridContainer/KeyboardActionButton" instance=ExtResource( 2 )]
+position = Vector2( 35, 15 )
+
+[node name="GamepadActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown/GridContainer"]
+margin_left = 255.0
+margin_right = 295.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="XBoxInputGfx" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown/GridContainer/GamepadActionButton" instance=ExtResource( 4 )]
+position = Vector2( 20, 15 )
+
+[node name="ActionMoveLeft" type="PanelContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 110.0
+margin_right = 315.0
+margin_bottom = 161.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+ActionName = "MoveLeft"
+
+[node name="RestoreFocusTimer" type="Timer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft"]
+one_shot = true
+
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 305.0
+margin_bottom = 41.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="ActionNameLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft/GridContainer"]
+margin_top = 3.0
+margin_right = 105.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 105, 0 )
+focus_mode = 2
+text = "ActionNameLabel"
+
+[node name="KeyboardActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft/GridContainer"]
+margin_left = 145.0
+margin_right = 215.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 70, 0 )
+focus_neighbour_left = NodePath(".")
+
+[node name="KeyboardInputKey" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft/GridContainer/KeyboardActionButton" instance=ExtResource( 2 )]
+position = Vector2( 35, 15 )
+
+[node name="GamepadActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft/GridContainer"]
+margin_left = 255.0
+margin_right = 295.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="XBoxInputGfx" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft/GridContainer/GamepadActionButton" instance=ExtResource( 4 )]
+position = Vector2( 20, 15 )
+
+[node name="ActionMoveRight" type="PanelContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 165.0
+margin_right = 315.0
+margin_bottom = 216.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+ActionName = "MoveRight"
+
+[node name="RestoreFocusTimer" type="Timer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight"]
+one_shot = true
+
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 305.0
+margin_bottom = 41.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="ActionNameLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight/GridContainer"]
+margin_top = 3.0
+margin_right = 105.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 105, 0 )
+focus_mode = 2
+text = "ActionNameLabel"
+
+[node name="KeyboardActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight/GridContainer"]
+margin_left = 145.0
+margin_right = 215.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 70, 0 )
+focus_neighbour_left = NodePath(".")
+
+[node name="KeyboardInputKey" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight/GridContainer/KeyboardActionButton" instance=ExtResource( 2 )]
+position = Vector2( 35, 15 )
+
+[node name="GamepadActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight/GridContainer"]
+margin_left = 255.0
+margin_right = 295.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="XBoxInputGfx" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight/GridContainer/GamepadActionButton" instance=ExtResource( 4 )]
+position = Vector2( 20, 15 )
+
+[node name="ActionJump" type="PanelContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 220.0
+margin_right = 315.0
+margin_bottom = 271.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+ActionName = "Jump"
+
+[node name="RestoreFocusTimer" type="Timer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump"]
+one_shot = true
+
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 305.0
+margin_bottom = 41.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="ActionNameLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump/GridContainer"]
+margin_top = 3.0
+margin_right = 105.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 105, 0 )
+focus_mode = 2
+text = "ActionNameLabel"
+
+[node name="KeyboardActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump/GridContainer"]
+margin_left = 145.0
+margin_right = 215.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 70, 0 )
+focus_neighbour_left = NodePath(".")
+
+[node name="KeyboardInputKey" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump/GridContainer/KeyboardActionButton" instance=ExtResource( 2 )]
+position = Vector2( 35, 15 )
+
+[node name="GamepadActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump/GridContainer"]
+margin_left = 255.0
+margin_right = 295.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="XBoxInputGfx" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump/GridContainer/GamepadActionButton" instance=ExtResource( 4 )]
+position = Vector2( 20, 15 )
+
+[node name="ActionGlide" type="PanelContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 275.0
+margin_right = 315.0
+margin_bottom = 326.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+ActionName = "Glide"
+
+[node name="RestoreFocusTimer" type="Timer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide"]
+one_shot = true
+
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 305.0
+margin_bottom = 41.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="ActionNameLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide/GridContainer"]
+margin_top = 3.0
+margin_right = 105.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 105, 0 )
+focus_mode = 2
+text = "ActionNameLabel"
+
+[node name="KeyboardActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide/GridContainer"]
+margin_left = 145.0
+margin_right = 215.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 70, 0 )
+focus_neighbour_left = NodePath(".")
+
+[node name="KeyboardInputKey" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide/GridContainer/KeyboardActionButton" instance=ExtResource( 2 )]
+position = Vector2( 35, 15 )
+
+[node name="GamepadActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide/GridContainer"]
+margin_left = 255.0
+margin_right = 295.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="XBoxInputGfx" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide/GridContainer/GamepadActionButton" instance=ExtResource( 4 )]
+position = Vector2( 20, 15 )
+
+[node name="ActionAttack" type="PanelContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 330.0
+margin_right = 315.0
+margin_bottom = 381.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+ActionName = "Attack"
+
+[node name="RestoreFocusTimer" type="Timer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack"]
+one_shot = true
+
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 305.0
+margin_bottom = 41.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="ActionNameLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack/GridContainer"]
+margin_top = 3.0
+margin_right = 105.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 105, 0 )
+focus_mode = 2
+text = "ActionNameLabel"
+
+[node name="KeyboardActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack/GridContainer"]
+margin_left = 145.0
+margin_right = 215.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 70, 0 )
+focus_neighbour_left = NodePath(".")
+focus_neighbour_bottom = NodePath("../../../ActionInteract/GridContainer/KeyboardActionButton")
+
+[node name="KeyboardInputKey" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack/GridContainer/KeyboardActionButton" instance=ExtResource( 2 )]
+position = Vector2( 35, 15 )
+
+[node name="GamepadActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack/GridContainer"]
+margin_left = 255.0
+margin_right = 295.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 40, 0 )
+focus_neighbour_bottom = NodePath("../../../ActionInteract/GridContainer/GamepadActionButton")
+
+[node name="XBoxInputGfx" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack/GridContainer/GamepadActionButton" instance=ExtResource( 4 )]
+position = Vector2( 20, 15 )
+
+[node name="ActionInteract" type="PanelContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 385.0
+margin_right = 315.0
+margin_bottom = 436.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+ActionName = "InteractWithObject"
+
+[node name="RestoreFocusTimer" type="Timer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract"]
+one_shot = true
+
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 305.0
+margin_bottom = 41.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="ActionNameLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract/GridContainer"]
+margin_top = 3.0
+margin_right = 105.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 105, 0 )
+focus_mode = 2
+text = "ActionNameLabel"
+
+[node name="KeyboardActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract/GridContainer"]
+margin_left = 145.0
+margin_right = 215.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 70, 0 )
+focus_neighbour_left = NodePath(".")
+focus_neighbour_bottom = NodePath("../../../ActionBowAttack/GridContainer/KeyboardActionButton")
+
+[node name="KeyboardInputKey" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract/GridContainer/KeyboardActionButton" instance=ExtResource( 2 )]
+position = Vector2( 35, 15 )
+
+[node name="GamepadActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract/GridContainer"]
+margin_left = 255.0
+margin_right = 295.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 40, 0 )
+focus_neighbour_bottom = NodePath("../../../ActionBowAttack/GridContainer/GamepadActionButton")
+
+[node name="XBoxInputGfx" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract/GridContainer/GamepadActionButton" instance=ExtResource( 4 )]
+position = Vector2( 20, 15 )
+
+[node name="ActionBowAttack" type="PanelContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 440.0
+margin_right = 315.0
+margin_bottom = 491.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+ActionName = "AttackWithBow"
+
+[node name="RestoreFocusTimer" type="Timer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack"]
+one_shot = true
+
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 305.0
+margin_bottom = 41.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="ActionNameLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack/GridContainer"]
+margin_top = 3.0
+margin_right = 105.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 105, 0 )
+focus_mode = 2
+text = "ActionNameLabel"
+
+[node name="KeyboardActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack/GridContainer"]
+margin_left = 145.0
+margin_right = 215.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 70, 0 )
+focus_neighbour_left = NodePath(".")
+focus_neighbour_bottom = NodePath("../../../ActionPauseGame/GridContainer/KeyboardActionButton")
+
+[node name="KeyboardInputKey" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack/GridContainer/KeyboardActionButton" instance=ExtResource( 2 )]
+position = Vector2( 35, 15 )
+
+[node name="GamepadActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack/GridContainer"]
+margin_left = 255.0
+margin_right = 295.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 40, 0 )
+focus_neighbour_bottom = NodePath("../../../ActionPauseGame/GridContainer/GamepadActionButton")
+
+[node name="XBoxInputGfx" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack/GridContainer/GamepadActionButton" instance=ExtResource( 4 )]
+position = Vector2( 20, 15 )
+
+[node name="ActionPauseGame" type="PanelContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 495.0
+margin_right = 315.0
+margin_bottom = 546.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+ActionName = "PauseGame"
+
+[node name="RestoreFocusTimer" type="Timer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame"]
+one_shot = true
+
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 305.0
+margin_bottom = 41.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="ActionNameLabel" type="Label" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame/GridContainer"]
+margin_top = 3.0
+margin_right = 105.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 105, 0 )
+focus_mode = 2
+text = "ActionNameLabel"
+
+[node name="KeyboardActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame/GridContainer"]
+margin_left = 145.0
+margin_right = 215.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 70, 0 )
+focus_neighbour_left = NodePath(".")
+focus_neighbour_bottom = NodePath("../../../../../ToVideoButton")
+
+[node name="KeyboardInputKey" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame/GridContainer/KeyboardActionButton" instance=ExtResource( 2 )]
+position = Vector2( 35, 15 )
+
+[node name="GamepadActionButton" type="Button" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame/GridContainer"]
+margin_left = 255.0
+margin_right = 295.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 40, 0 )
+focus_neighbour_bottom = NodePath("../../../../../CloseButton")
+
+[node name="XBoxInputGfx" parent="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame/GridContainer/GamepadActionButton" instance=ExtResource( 4 )]
+position = Vector2( 20, 15 )
+
+[node name="Audio" type="Tabs" parent="Control/MarginContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 41.0
+margin_right = -5.0
+margin_bottom = -9.0
+script = ExtResource( 7 )
+
+[node name="Panel" type="Panel" parent="Control/MarginContainer/TabContainer/Audio"]
+margin_left = 28.0
+margin_top = 10.0
+margin_right = 366.0
+margin_bottom = 460.0
+
+[node name="ToControlsButton" type="Button" parent="Control/MarginContainer/TabContainer/Audio/Panel"]
+margin_left = 13.0
+margin_top = 393.0
+margin_right = 93.0
+margin_bottom = 433.0
+text = "Controls"
+
+[node name="ToVideoButton" type="Button" parent="Control/MarginContainer/TabContainer/Audio/Panel"]
+margin_left = 130.0
+margin_top = 393.0
+margin_right = 210.0
+margin_bottom = 433.0
+text = "Video"
+
+[node name="CloseButton" type="Button" parent="Control/MarginContainer/TabContainer/Audio/Panel"]
+margin_left = 245.0
+margin_top = 393.0
+margin_right = 325.0
+margin_bottom = 433.0
+text = "Close"
+
+[node name="MusicVolume" type="Panel" parent="Control/MarginContainer/TabContainer/Audio/Panel"]
+margin_left = 21.0
+margin_top = 25.0
+margin_right = 317.0
+margin_bottom = 65.0
+
+[node name="Label" type="Label" parent="Control/MarginContainer/TabContainer/Audio/Panel/MusicVolume"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 84.0
+margin_bottom = 33.0
+text = "Music Volume"
+
+[node name="MusicVolumeBar" parent="Control/MarginContainer/TabContainer/Audio/Panel/MusicVolume" instance=ExtResource( 5 )]
+focus_neighbour_left = NodePath(".")
+
+[node name="SoundVolume" type="Panel" parent="Control/MarginContainer/TabContainer/Audio/Panel"]
+margin_left = 21.0
+margin_top = 97.0
+margin_right = 317.0
+margin_bottom = 137.0
+
+[node name="Label" type="Label" parent="Control/MarginContainer/TabContainer/Audio/Panel/SoundVolume"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 84.0
+margin_bottom = 33.0
+text = "Sound Volume"
+
+[node name="SoundVolumeBar" parent="Control/MarginContainer/TabContainer/Audio/Panel/SoundVolume" instance=ExtResource( 5 )]
+focus_neighbour_left = NodePath(".")
+
+[node name="MasterVolume" type="Panel" parent="Control/MarginContainer/TabContainer/Audio/Panel"]
+margin_left = 21.0
+margin_top = 169.0
+margin_right = 317.0
+margin_bottom = 209.0
+
+[node name="Label" type="Label" parent="Control/MarginContainer/TabContainer/Audio/Panel/MasterVolume"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 84.0
+margin_bottom = 33.0
+text = "Master Volume"
+
+[node name="MasterVolumeBar" parent="Control/MarginContainer/TabContainer/Audio/Panel/MasterVolume" instance=ExtResource( 5 )]
+focus_neighbour_left = NodePath(".")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/TabContainer/Audio/Panel"]
+margin_left = 29.0
+margin_top = 241.0
+margin_right = 317.0
+margin_bottom = 377.0
+text = "Change volume with:
+Mouse: MouseWheel Up / Down
+Keyboard: Left / Right
+Gamepad: D-Pad Left / D-Pad Right"
+align = 1
+valign = 1
+
+[node name="Video" type="Tabs" parent="Control/MarginContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 41.0
+margin_right = -5.0
+margin_bottom = -9.0
+script = ExtResource( 11 )
+
+[node name="Panel" type="Panel" parent="Control/MarginContainer/TabContainer/Video"]
+margin_left = 28.0
+margin_top = 10.0
+margin_right = 366.0
+margin_bottom = 460.0
+
+[node name="VideoResolution" type="GridContainer" parent="Control/MarginContainer/TabContainer/Video/Panel"]
+margin_left = 65.0
+margin_top = 20.0
+margin_right = 204.0
+margin_bottom = 60.0
+columns = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/TabContainer/Video/Panel/VideoResolution"]
+margin_top = 3.0
+margin_right = 91.0
+margin_bottom = 28.0
+text = "Video Resolution"
+
+[node name="OptionButton" type="OptionButton" parent="Control/MarginContainer/TabContainer/Video/Panel/VideoResolution"]
+margin_left = 95.0
+margin_right = 139.0
+margin_bottom = 31.0
+
+[node name="ToControlsButton" type="Button" parent="Control/MarginContainer/TabContainer/Video/Panel"]
+margin_left = 13.0
+margin_top = 393.0
+margin_right = 93.0
+margin_bottom = 433.0
+text = "Controls"
+
+[node name="ToAudioButton" type="Button" parent="Control/MarginContainer/TabContainer/Video/Panel"]
+margin_left = 130.0
+margin_top = 393.0
+margin_right = 210.0
+margin_bottom = 433.0
+text = "Audio"
+
+[node name="CloseButton" type="Button" parent="Control/MarginContainer/TabContainer/Video/Panel"]
+margin_left = 245.0
+margin_top = 393.0
+margin_right = 325.0
+margin_bottom = 433.0
+text = "Close"
+
+[node name="CheckBoxFullscreen" type="CheckBox" parent="Control/MarginContainer/TabContainer/Video/Panel"]
+margin_left = 118.0
+margin_top = 73.0
+margin_right = 225.0
+margin_bottom = 104.0
+text = "Fullscreen"
+
+[node name="CheckBoxVsync" type="CheckBox" parent="Control/MarginContainer/TabContainer/Video/Panel"]
+margin_left = 129.0
+margin_top = 148.0
+margin_right = 216.0
+margin_bottom = 179.0
+text = "V-Sync"
+
+[node name="CheckBoxBorderlessWindow" type="CheckBox" parent="Control/MarginContainer/TabContainer/Video/Panel"]
+margin_left = 96.0
+margin_top = 225.0
+margin_right = 250.0
+margin_bottom = 256.0
+text = "Borderless Window"
+
+[connection signal="tab_selected" from="Control/MarginContainer/TabContainer" to="Control/MarginContainer/TabContainer" method="OnTabContainerTabSelected"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ToAudioButton" to="Control/MarginContainer/TabContainer" method="OnToAudioButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ToVideoButton" to="Control/MarginContainer/TabContainer" method="OnToVideoButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/CloseButton" to="Control/MarginContainer/TabContainer" method="OnCloseButtonPressed"]
+[connection signal="timeout" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp/RestoreFocusTimer" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp" method="OnRestoreFocusTimerTimeout"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp/GridContainer/KeyboardActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp" method="OnKeyboardActionButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp/GridContainer/GamepadActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionUp" method="OnGamepadActionButtonPressed"]
+[connection signal="timeout" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown/RestoreFocusTimer" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown" method="OnRestoreFocusTimerTimeout"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown/GridContainer/KeyboardActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown" method="OnKeyboardActionButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown/GridContainer/GamepadActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionDown" method="OnGamepadActionButtonPressed"]
+[connection signal="timeout" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft/RestoreFocusTimer" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft" method="OnRestoreFocusTimerTimeout"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft/GridContainer/KeyboardActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft" method="OnKeyboardActionButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft/GridContainer/GamepadActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveLeft" method="OnGamepadActionButtonPressed"]
+[connection signal="timeout" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight/RestoreFocusTimer" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight" method="OnRestoreFocusTimerTimeout"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight/GridContainer/KeyboardActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight" method="OnKeyboardActionButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight/GridContainer/GamepadActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionMoveRight" method="OnGamepadActionButtonPressed"]
+[connection signal="timeout" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump/RestoreFocusTimer" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump" method="OnRestoreFocusTimerTimeout"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump/GridContainer/KeyboardActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump" method="OnKeyboardActionButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump/GridContainer/GamepadActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionJump" method="OnGamepadActionButtonPressed"]
+[connection signal="timeout" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide/RestoreFocusTimer" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide" method="OnRestoreFocusTimerTimeout"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide/GridContainer/KeyboardActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide" method="OnKeyboardActionButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide/GridContainer/GamepadActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionGlide" method="OnGamepadActionButtonPressed"]
+[connection signal="timeout" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack/RestoreFocusTimer" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack" method="OnRestoreFocusTimerTimeout"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack/GridContainer/KeyboardActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack" method="OnKeyboardActionButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack/GridContainer/GamepadActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionAttack" method="OnGamepadActionButtonPressed"]
+[connection signal="timeout" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract/RestoreFocusTimer" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract" method="OnRestoreFocusTimerTimeout"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract/GridContainer/KeyboardActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract" method="OnKeyboardActionButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract/GridContainer/GamepadActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionInteract" method="OnGamepadActionButtonPressed"]
+[connection signal="timeout" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack/RestoreFocusTimer" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack" method="OnRestoreFocusTimerTimeout"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack/GridContainer/KeyboardActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack" method="OnKeyboardActionButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack/GridContainer/GamepadActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionBowAttack" method="OnGamepadActionButtonPressed"]
+[connection signal="timeout" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame/RestoreFocusTimer" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame" method="OnRestoreFocusTimerTimeout"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame/GridContainer/KeyboardActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame" method="OnKeyboardActionButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame/GridContainer/GamepadActionButton" to="Control/MarginContainer/TabContainer/Controls/Panel/ScrollContainer/VBoxContainer/ActionPauseGame" method="OnGamepadActionButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Audio/Panel/ToControlsButton" to="Control/MarginContainer/TabContainer" method="OnToControlsButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Audio/Panel/ToVideoButton" to="Control/MarginContainer/TabContainer" method="OnToVideoButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Audio/Panel/CloseButton" to="Control/MarginContainer/TabContainer" method="OnCloseButtonPressed"]
+[connection signal="item_selected" from="Control/MarginContainer/TabContainer/Video/Panel/VideoResolution/OptionButton" to="Control/MarginContainer/TabContainer/Video" method="OnOptionButtonItemSelected"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Video/Panel/ToControlsButton" to="Control/MarginContainer/TabContainer" method="OnToControlsButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Video/Panel/ToAudioButton" to="Control/MarginContainer/TabContainer" method="OnToAudioButtonPressed"]
+[connection signal="pressed" from="Control/MarginContainer/TabContainer/Video/Panel/CloseButton" to="Control/MarginContainer/TabContainer" method="OnCloseButtonPressed"]
+[connection signal="toggled" from="Control/MarginContainer/TabContainer/Video/Panel/CheckBoxFullscreen" to="Control/MarginContainer/TabContainer/Video" method="OnCheckBoxFullscreenToggled"]
+[connection signal="toggled" from="Control/MarginContainer/TabContainer/Video/Panel/CheckBoxVsync" to="Control/MarginContainer/TabContainer/Video" method="OnCheckBoxVsyncToggled"]
+[connection signal="toggled" from="Control/MarginContainer/TabContainer/Video/Panel/CheckBoxBorderlessWindow" to="Control/MarginContainer/TabContainer/Video" method="OnCheckBoxBorderlessWindowToggled"]

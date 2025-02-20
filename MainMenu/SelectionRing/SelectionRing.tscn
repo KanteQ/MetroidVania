@@ -1,0 +1,604 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/ExitButtonPressed.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/StartButtonHover.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/SelectionRing.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/SelectionRingBg.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/SettingsButtonPressed.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/ExitButtonHover.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/StartButtonPressed.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/StartButton.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/SettingsButtonHover.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/SettingsButton.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/ExitButton.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/StartActive.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/ExitActive.png" type="Texture" id=13]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Gfx/SettingsActive.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Sfx/RotateMenu.wav" type="AudioStream" id=15]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/Sfx/MenuSelect.wav" type="AudioStream" id=16]
+[ext_resource path="res://Scenes/MainMenu/SelectionRing/SelectionRing.cs" type="Script" id=17]
+
+[sub_resource type="Animation" id=7]
+resource_name = "RESET"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("StartActive:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SettingsActive:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ExitActive:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "RotateExitToSettings"
+tracks/0/type = "audio"
+tracks/0/path = NodePath("RotateMenuSfx")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -240, -0.25, 0, 0.5, -48.0117, -120, -0.3, 40.9882, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:SelectedMenuOption")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "settings" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StartActive:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ExitActive:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SettingsActive:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "RotateExitToStart"
+length = 0.7
+tracks/0/type = "audio"
+tracks/0/path = NodePath("RotateMenuSfx")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -240, -0.25, 0, 0.4, 57.3594, -360, -0.3, -42.0965, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:SelectedMenuOption")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "start" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StartActive:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ExitActive:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SettingsActive:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "RotateSettingsToExit"
+tracks/0/type = "audio"
+tracks/0/path = NodePath("RotateMenuSfx")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -120, -0.25, 0, 0.4, 57.3594, -240, -0.3, -42.0965, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:SelectedMenuOption")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "exit" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StartActive:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ExitActive:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SettingsActive:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "RotateSettingsToStart"
+tracks/0/type = "audio"
+tracks/0/path = NodePath("RotateMenuSfx")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -120, -0.25, 0, 0.4, -37.3005, 0, -0.3, 39.0194, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:SelectedMenuOption")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "start" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StartActive:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ExitActive:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SettingsActive:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "RotateStartToExit"
+tracks/0/type = "audio"
+tracks/0/path = NodePath("RotateMenuSfx")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -360, -0.25, 0, 0.5, -48.0117, -240, -0.3, 40.9882, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:SelectedMenuOption")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "exit" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StartActive:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ExitActive:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SettingsActive:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "RotateStartToSettings"
+length = 0.7
+tracks/0/type = "audio"
+tracks/0/path = NodePath("RotateMenuSfx")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.4, 57.3594, -120, -0.3, -42.0965, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:SelectedMenuOption")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "settings" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StartActive:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ExitActive:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SettingsActive:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="SelectionRing" type="Node2D"]
+script = ExtResource( 17 )
+SelectedMenuOption = "settings"
+
+[node name="Bg" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="Ring" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="StartButton" type="TextureButton" parent="."]
+margin_left = -50.0
+margin_top = -200.0
+margin_right = 50.0
+margin_bottom = -100.0
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 2 )
+texture_disabled = ExtResource( 8 )
+
+[node name="ExitButtonNode" type="Node2D" parent="."]
+position = Vector2( -129, 76 )
+rotation = -2.0944
+
+[node name="ExitButton" type="TextureButton" parent="ExitButtonNode"]
+margin_left = -49.0
+margin_top = -49.0
+margin_right = 51.0
+margin_bottom = 51.0
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 1 )
+texture_hover = ExtResource( 6 )
+texture_disabled = ExtResource( 11 )
+
+[node name="SettingsButtonNode" type="Node2D" parent="."]
+position = Vector2( 129, 74 )
+rotation = 2.0944
+
+[node name="SettingsButton" type="TextureButton" parent="SettingsButtonNode"]
+margin_left = -49.634
+margin_top = -50.366
+margin_right = 50.366
+margin_bottom = 49.634
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 9 )
+texture_disabled = ExtResource( 10 )
+
+[node name="StartActive" type="Sprite" parent="."]
+position = Vector2( 0, -150 )
+texture = ExtResource( 12 )
+
+[node name="SettingsActive" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 128, 74 )
+rotation = 1.309
+texture = ExtResource( 14 )
+
+[node name="ExitActive" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -128, 75 )
+rotation = -2.0944
+texture = ExtResource( 13 )
+
+[node name="MenuSelectSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+
+[node name="RotateMenuSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+
+[node name="RingAnimations" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/RotateExitToSettings = SubResource( 1 )
+anims/RotateExitToStart = SubResource( 2 )
+anims/RotateSettingsToExit = SubResource( 3 )
+anims/RotateSettingsToStart = SubResource( 4 )
+anims/RotateStartToExit = SubResource( 5 )
+anims/RotateStartToSettings = SubResource( 6 )
+
+[node name="SelectionTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
+[connection signal="button_down" from="StartButton" to="." method="OnStartButtonButtonDown"]
+[connection signal="button_up" from="StartButton" to="." method="OnStartButtonButtonUp"]
+[connection signal="pressed" from="StartButton" to="." method="OnStartButtonPressed"]
+[connection signal="button_down" from="ExitButtonNode/ExitButton" to="." method="OnExitButtonButtonDown"]
+[connection signal="button_up" from="ExitButtonNode/ExitButton" to="." method="OnExitButtonButtonUp"]
+[connection signal="button_down" from="SettingsButtonNode/SettingsButton" to="." method="OnSettingsButtonButtonDown"]
+[connection signal="button_up" from="SettingsButtonNode/SettingsButton" to="." method="OnSettingsButtonButtonUp"]
+[connection signal="pressed" from="SettingsButtonNode/SettingsButton" to="." method="OnSettingsButtonPressed"]
+[connection signal="timeout" from="SelectionTimer" to="." method="OnSelectionTimerTimeout"]

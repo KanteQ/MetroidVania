@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Particles/Dust/Gfx/DustParticle.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Particles/Particles.cs" type="Script" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.0120482, 0.522088, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0.802914 ), 0.0, 0.0, 0, 0, Vector2( 0.657801, 0.52684 ), 0.0, 0.0, 0, 0, Vector2( 0.998227, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+render_priority = 5
+lifetime_randomness = 0.35
+emission_shape = 5
+emission_ring_radius = 12.8
+emission_ring_inner_radius = 2.0
+emission_ring_height = 2.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 30, 0 )
+spread = 100.0
+gravity = Vector3( 0, 80, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.22
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle_random = 0.56
+scale = 1.5
+scale_random = 0.53
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[node name="DustParticles" type="Particles2D"]
+emitting = false
+amount = 18
+lifetime = 0.4
+one_shot = true
+speed_scale = 0.8
+explosiveness = 0.91
+randomness = 0.43
+process_material = SubResource( 5 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

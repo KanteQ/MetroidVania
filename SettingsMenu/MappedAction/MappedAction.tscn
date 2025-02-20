@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/GUITheme/MetroidVaniaTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/SettingsMenu/XboxInputGfx/XboxInputGfx.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/SettingsMenu/MappedAction/MappedAction.cs" type="Script" id=3]
+[ext_resource path="res://Scenes/SettingsMenu/KeyboardInputKey/KeyboardInputKey.tscn" type="PackedScene" id=4]
+
+[node name="MappedAction" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -954.0
+margin_bottom = -664.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+ActionName = "MoveLeft"
+
+[node name="RestoreFocusTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 311.0
+margin_bottom = 41.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="ActionNameLabel" type="Label" parent="GridContainer"]
+margin_top = 2.0
+margin_right = 105.0
+margin_bottom = 26.2
+rect_min_size = Vector2( 105, 0 )
+focus_mode = 2
+text = "ActionNameLabel"
+
+[node name="KeyboardActionButton" type="Button" parent="GridContainer"]
+margin_left = 145.0
+margin_right = 215.0
+margin_bottom = 30.2
+rect_min_size = Vector2( 70, 0 )
+
+[node name="KeyboardInputKey" parent="GridContainer/KeyboardActionButton" instance=ExtResource( 4 )]
+position = Vector2( 35, 15 )
+
+[node name="GamepadActionButton" type="Button" parent="GridContainer"]
+margin_left = 255.0
+margin_right = 295.0
+margin_bottom = 30.2
+rect_min_size = Vector2( 40, 0 )
+
+[node name="XBoxInputGfx" parent="GridContainer/GamepadActionButton" instance=ExtResource( 2 )]
+position = Vector2( 20, 15 )
+
+[connection signal="timeout" from="RestoreFocusTimer" to="." method="OnRestoreFocusTimerTimeout"]
+[connection signal="pressed" from="GridContainer/KeyboardActionButton" to="." method="OnKeyboardActionButtonPressed"]
+[connection signal="pressed" from="GridContainer/GamepadActionButton" to="." method="OnGamepadActionButtonPressed"]

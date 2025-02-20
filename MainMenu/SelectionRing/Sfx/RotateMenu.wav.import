@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/RotateMenu.wav-dbb707e2dfe9d8930e99cc29b0da0f9b.sample"
+
+[deps]
+
+source_file="res://Scenes/MainMenu/SelectionRing/Sfx/RotateMenu.wav"
+dest_files=[ "res://.import/RotateMenu.wav-dbb707e2dfe9d8930e99cc29b0da0f9b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
